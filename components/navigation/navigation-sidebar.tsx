@@ -1,5 +1,7 @@
-import { db } from "@/lib/db";
-import { currentProfile } from "@/lib/current-profile";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import NavigationAction from "@components/navigation/navigation-action";
 import { Separator } from "@components/ui/separator";
@@ -8,24 +10,22 @@ import NavigationItem from "@components/navigation/navigation-item";
 import { ModeToggle } from "@components/custom/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 
-async function NavigationSidebar() {
-    const profile = await currentProfile();
-    const servers = await db.server.findMany({
-        where: {
-            members: {
-                some: {
-                    profileId: profile?.id,
-                },
-            },
-        },
-    });
+function NavigationSidebar({ servers }: { servers: any }) {
+    const router = useRouter();
+
+    useEffect(() => {
+        if (router) {
+            console.log("From navigation");
+            return router.refresh();
+        }
+    }, [router]);
 
     return (
         <div className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-neutral-200 dark:bg-[#1e1f22] py-3">
             <NavigationAction />
             <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
             <ScrollArea className="flex-1 w-full">
-                {servers.map((server) => (
+                {servers?.map((server: any) => (
                     <div key={server.id} className="mb-4">
                         <NavigationItem {...server} />
                     </div>
@@ -34,7 +34,7 @@ async function NavigationSidebar() {
             <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
                 <ModeToggle />
                 <UserButton
-                    afterSignOutUrl="/"
+                    afterSignOutUrl="/create-server"
                     appearance={{
                         elements: {
                             avatarBox: "h-[40px] w-[40px]",

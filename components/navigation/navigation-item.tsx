@@ -15,7 +15,7 @@ export default function NavigationItem({ id, name, imageUrl }: NavigationItemPro
     const router = useRouter();
 
     return (
-        <ActionToolTip side="right" align="center" label={"Shabala"}>
+        <ActionToolTip side="right" align="center" label={name}>
             <button
                 className="group relative flex items-center"
                 onClick={() => {
@@ -36,7 +36,7 @@ export default function NavigationItem({ id, name, imageUrl }: NavigationItemPro
                         params?.serverId === id && "bg-primary/10 text-primary rounded-[16px]"
                     )}
                 >
-                    <Image fill sizes="100vw" src={imageUrl} alt={name} />
+                    <Image fill sizes="100vw" src={imageUrl} alt={name} priority />
                 </div>
             </button>
         </ActionToolTip>
