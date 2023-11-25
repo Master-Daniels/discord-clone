@@ -51,7 +51,7 @@ const CreateChannelModal = () => {
     }, [form, channelType]);
 
     const isModalOpen = modal.isOpen && modal.type === "createChannel";
-    const isLoading = form.formState.isLoading;
+    const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: FormSchema) => {
         try {

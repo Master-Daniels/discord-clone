@@ -45,7 +45,9 @@ const InitialForm = () => {
         },
     });
 
-    const isLoading = form.formState.isLoading;
+    const isLoading = form.formState.isSubmitting;
+    console.log(isLoading);
+    
 
     const onSubmit = async (values: FormSchema) => {
         const res = await fetch("/api/servers", {
@@ -56,7 +58,6 @@ const InitialForm = () => {
             },
         });
         const data = await res.json();
-        console.log(data);
 
         form.reset();
         router.refresh();
@@ -89,7 +90,7 @@ const InitialForm = () => {
                                     name="imageUrl"
                                     render={({ field }) => {
                                         return (
-                                            <FormItem className="flex justify-center items-center">
+                                            <FormItem className="flex flex-col justify-center items-center">
                                                 <FormControl className="text-center">
                                                     <FileUpload
                                                         endpoint="serverImage"
@@ -97,6 +98,7 @@ const InitialForm = () => {
                                                         onChange={field.onChange}
                                                     />
                                                 </FormControl>
+                                                <FormMessage />
                                             </FormItem>
                                         );
                                     }}

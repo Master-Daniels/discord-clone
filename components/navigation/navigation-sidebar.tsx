@@ -1,8 +1,3 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
 import NavigationAction from "@components/navigation/navigation-action";
 import { Separator } from "@components/ui/separator";
 import { ScrollArea } from "@components/ui/scroll-area";
@@ -11,15 +6,6 @@ import { ModeToggle } from "@components/custom/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 
 function NavigationSidebar({ servers }: { servers: any }) {
-    const router = useRouter();
-
-    useEffect(() => {
-        if (router) {
-            console.log("From navigation");
-            return router.refresh();
-        }
-    }, [router]);
-
     return (
         <div className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-neutral-200 dark:bg-[#1e1f22] py-3">
             <NavigationAction />
