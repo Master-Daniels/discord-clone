@@ -79,3 +79,13 @@
         @apply bg-background text-foreground;
     }
 }
+
+.hide {
+    display: none;
+}
+
+@media screen and (min-width: 730px) {
+    .hide {
+        display: flex;
+    }
+}

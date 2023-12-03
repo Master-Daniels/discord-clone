@@ -33,7 +33,7 @@ export default async function MainLayout({
 
     return (
         <div className="h-full">
-            <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
+            <div className="hide md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
                 <ServerSidebar serverId={params.serverId} />
             </div>
             <div className="h-full md:pl-60">{children}</div>
